@@ -38,7 +38,6 @@ export class OsClosedComponent implements AfterViewInit {
           this.lista.push(x)
         }
       })
-      this.lista = resposta;
       this.listarTecnico();
       this.listaCliente();
       this.dataSource = new MatTableDataSource<OS>(this.lista);
