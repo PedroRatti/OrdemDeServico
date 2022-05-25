@@ -13,10 +13,17 @@
     </mat-form-field>
 
     <mat-form-field class="full-width">
+        <mat-label>Cidade</mat-label>
+        <input [(ngModel)]="tecnico.cidade" [formControl]="cidade" required name="cidade" maxlength="100" matInput placeholder="Ex. Florianópolis">
+        <mat-error *ngIf="cidade.invalid">{{ errorValidCidade() }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
         <mat-label>Telefone</mat-label>
         <input [(ngModel)]="tecnico.telefone" [formControl]="telefone" required name="telefone" maxlength="18" matInput placeholder="Ex. (00)90000-0000">
         <mat-error *ngIf="telefone.invalid">{{ errorValidTelefone() }}</mat-error>
     </mat-form-field>
+
     <button class="mat-elevation-z8" (click)="create()" [disabled]="errorValidName() || errorValidCPF() || errorValidTelefone()" mat-stroked-button color="accent">CRIAR</button>
     <button class="mat-elevation-z8" (click)="cancel()" mat-stroked-button color="warn">CANCELAR</button>
 </form>

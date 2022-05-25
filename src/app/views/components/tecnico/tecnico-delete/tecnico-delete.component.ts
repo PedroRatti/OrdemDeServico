@@ -16,6 +16,7 @@ export class TecnicoDeleteComponent implements OnInit {
     id: '',
     nome: '',
     cpf: '',
+    cidade: '',
     telefone: ''
   }
 

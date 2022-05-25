@@ -14,6 +14,8 @@ import { TecnicoService } from 'src/app/services/tecnico.service';
 })
 export class OsUpdateComponent implements OnInit {
 
+  id_os = ''
+
   os: OS = {
     tecnico: '',
     cliente: '',
@@ -34,14 +36,14 @@ export class OsUpdateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.os.id = this.route.snapshot.paramMap.get('id')
+    this.id_os = this.route.snapshot.paramMap.get('id')!
     this.findById();
     this.listarTecnicos();
     this.listarClientes();
   }
 
   findById(): void {
-    this.service.findById(this.os.id).subscribe(resposta => {
+    this.service.findById(this.id_os).subscribe(resposta => {
       this.os = resposta;
       this.converteDados();
     })

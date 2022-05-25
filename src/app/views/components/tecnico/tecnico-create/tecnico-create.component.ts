@@ -15,11 +15,13 @@ export class TecnicoCreateComponent implements OnInit {
     id: '',
     nome: '',
     cpf: '',
+    cidade: '',
     telefone: ''
   }
 
   nome = new FormControl('', [Validators.minLength(5)])
   cpf = new FormControl('', [Validators.minLength(11)])
+  cidade = new FormControl('', [Validators.minLength(1)])
   telefone = new FormControl('', [Validators.minLength(11)])
 
   constructor(
@@ -57,6 +59,13 @@ export class TecnicoCreateComponent implements OnInit {
   errorValidCPF() {
     if (this.cpf.invalid) {
       return 'O CPF deve ter entre 11 e 15 caracteres!';
+    }
+    return false;
+  }
+
+  errorValidCidade() {
+    if (this.cidade.invalid) {
+      return 'A Cidade deve ter entre 1 e 100 caracteres!';
     }
     return false;
   }

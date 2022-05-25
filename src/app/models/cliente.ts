@@ -3,4 +3,5 @@ export interface Cliente {
     nome: String;
     cpf: String;
     telefone: String;
+    cidade: String;
 }
