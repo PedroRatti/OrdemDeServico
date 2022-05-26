@@ -18,6 +18,7 @@ export class OsCreateComponent implements OnInit {
     tecnico: '',
     cliente: '',
     observacoes: '',
+    servico: '',
     status: '',
     prioridade: ''
   }

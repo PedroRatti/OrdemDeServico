@@ -19,6 +19,7 @@ export class OsUpdateComponent implements OnInit {
   os: OS = {
     tecnico: '',
     cliente: '',
+    servico: '',
     observacoes: '',
     status: '',
     prioridade: ''
@@ -79,6 +80,20 @@ export class OsUpdateComponent implements OnInit {
       this.os.status = 1;
     } else {
       this.os.status = 2;
+    }
+
+    if (this.os.servico == "NENHUM SERVIÇO") {
+      this.os.status = 0;
+    } else if (this.os.servico == "ELETRICISTA") {
+      this.os.servico = 1;
+    } else if (this.os.servico == "PINTOR"){
+      this.os.servico = 2;
+    } else if (this.os.servico == "LIMPEZA"){
+      this.os.servico = 3;
+    } else if (this.os.servico == "VIDRACEIRO"){
+      this.os.servico = 4;
+    } else {
+      this.os.servico = 5;
     }
 
     if (this.os.prioridade == "BAIXA") {

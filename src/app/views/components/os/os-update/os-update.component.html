@@ -19,6 +19,18 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
+            <mat-label>Selecione um serviço</mat-label>
+            <mat-select [(value)]="os.servico">
+                <mat-option [value]="0">NENHUM SERVIÇO</mat-option>
+                <mat-option [value]="1">ELETRICISTA</mat-option>
+                <mat-option [value]="2">PINTOR</mat-option>
+                <mat-option [value]="3">LIMPEZA</mat-option>
+                <mat-option [value]="4">VIDRACEIRO</mat-option>
+                <mat-option [value]="3">ENCANADOR</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
             <mat-label>Selecione um status</mat-label>
             <mat-select [(value)]="os.status">
                 <mat-option [value]="0">ABERTO</mat-option>
