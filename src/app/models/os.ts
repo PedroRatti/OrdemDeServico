@@ -4,7 +4,7 @@ export interface OS {
     dataFechamento?: any;
     cidade?: String;
     prioridade: any;
-    servico: any;
+    servicos: any;
     observacoes: String;
     status: any;
     tecnico: any;

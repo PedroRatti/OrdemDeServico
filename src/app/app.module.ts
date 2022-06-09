@@ -38,6 +38,11 @@ import { OsCreateComponent } from './views/components/os/os-create/os-create.com
 import { OsUpdateComponent } from './views/components/os/os-update/os-update.component';
 import { OsViewComponent } from './views/components/os/os-view/os-view.component';
 import { OsClosedComponent } from './views/components/os/os-closed/os-closed.component';
+import { ServicosReadComponent } from './views/components/servicos/servicos-read/servicos-read.component';
+import { ServicosUpdateComponent } from './views/components/servicos/servicos-update/servicos-update.component';
+import { ServicosCreateComponent } from './views/components/servicos/servicos-create/servicos-create.component';
+import { ServicosDeleteComponent } from './views/components/servicos/servicos-delete/servicos-delete.component';
+
 
 @NgModule({
   declarations: [
@@ -58,7 +63,11 @@ import { OsClosedComponent } from './views/components/os/os-closed/os-closed.com
     OsCreateComponent,
     OsUpdateComponent,
     OsViewComponent,
-    OsClosedComponent
+    OsClosedComponent,
+    ServicosReadComponent,
+    ServicosUpdateComponent,
+    ServicosCreateComponent,
+    ServicosDeleteComponent
   ],
   imports: [
     BrowserModule,

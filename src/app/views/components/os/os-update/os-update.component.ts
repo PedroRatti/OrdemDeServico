@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/models/cliente';
 import { OS } from 'src/app/models/os';
+import { Servicos } from 'src/app/models/servicos';
 import { Tecnico } from 'src/app/models/tecnico';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { OsService } from 'src/app/services/os.service';
+import { ServicosService } from 'src/app/services/servicos.service';
 import { TecnicoService } from 'src/app/services/tecnico.service';
 
 @Component({
@@ -19,7 +21,7 @@ export class OsUpdateComponent implements OnInit {
   os: OS = {
     tecnico: '',
     cliente: '',
-    servico: '',
+    servicos: '',
     observacoes: '',
     status: '',
     prioridade: ''
@@ -27,10 +29,12 @@ export class OsUpdateComponent implements OnInit {
 
   tecnicos: Tecnico[] = []
   clientes: Cliente[] = []
+  servicos: Servicos[] = []
 
   constructor(
     private tecnicoService: TecnicoService,
     private clienteService: ClienteService,
+    private servicosService: ServicosService,
     private service: OsService,
     private router: Router,
     private route: ActivatedRoute
@@ -41,6 +45,7 @@ export class OsUpdateComponent implements OnInit {
     this.findById();
     this.listarTecnicos();
     this.listarClientes();
+    this.listarServicos()
   }
 
   findById(): void {
@@ -73,6 +78,12 @@ export class OsUpdateComponent implements OnInit {
     })
   }
 
+  listarServicos():void {
+    this.servicosService.findAll().subscribe(resposta => {
+      this.servicos = resposta;
+    })
+  }
+
   converteDados(): void {
     if (this.os.status == "ABERTO") {
       this.os.status = 0;
@@ -80,20 +91,6 @@ export class OsUpdateComponent implements OnInit {
       this.os.status = 1;
     } else {
       this.os.status = 2;
-    }
-
-    if (this.os.servico == "NENHUM SERVIÇO") {
-      this.os.status = 0;
-    } else if (this.os.servico == "ELETRICISTA") {
-      this.os.servico = 1;
-    } else if (this.os.servico == "PINTOR"){
-      this.os.servico = 2;
-    } else if (this.os.servico == "LIMPEZA"){
-      this.os.servico = 3;
-    } else if (this.os.servico == "VIDRACEIRO"){
-      this.os.servico = 4;
-    } else {
-      this.os.servico = 5;
     }
 
     if (this.os.prioridade == "BAIXA") {

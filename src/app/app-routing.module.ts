@@ -10,6 +10,10 @@ import { OsCreateComponent } from './views/components/os/os-create/os-create.com
 import { OsReadComponent } from './views/components/os/os-read/os-read.component';
 import { OsUpdateComponent } from './views/components/os/os-update/os-update.component';
 import { OsViewComponent } from './views/components/os/os-view/os-view.component';
+import { ServicosCreateComponent } from './views/components/servicos/servicos-create/servicos-create.component';
+import { ServicosDeleteComponent } from './views/components/servicos/servicos-delete/servicos-delete.component';
+import { ServicosReadComponent } from './views/components/servicos/servicos-read/servicos-read.component';
+import { ServicosUpdateComponent } from './views/components/servicos/servicos-update/servicos-update.component';
 import { TecnicoCreateComponent } from './views/components/tecnico/tecnico-create/tecnico-create.component';
 import { TecnicoDeleteComponent } from './views/components/tecnico/tecnico-delete/tecnico-delete.component';
 import { TecnicoReadComponent } from './views/components/tecnico/tecnico-read/tecnico-read.component';
@@ -71,6 +75,22 @@ const routes: Routes = [
  {
    path: 'os/view/:id',
    component: OsViewComponent
+ },
+ {
+   path: 'servicos',
+   component: ServicosReadComponent
+ },
+ {
+   path: 'servicos/update/:id',
+   component: ServicosUpdateComponent
+ },
+ {
+   path: 'servicos/create',
+   component: ServicosCreateComponent
+ },
+ {
+   path: 'servicos/delete',
+   component: ServicosDeleteComponent
  }
 ];
 

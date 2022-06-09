@@ -13,7 +13,7 @@ export class OsViewComponent implements OnInit {
   os: OS = {
     tecnico: '',
     cliente: '',
-    servico: '',
+    servicos: '',
     observacoes: '',
     prioridade: '',
     status: ''

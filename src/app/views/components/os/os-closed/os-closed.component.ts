@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { OS } from 'src/app/models/os';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { OsService } from 'src/app/services/os.service';
+import { ServicosService } from 'src/app/services/servicos.service';
 import { TecnicoService } from 'src/app/services/tecnico.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class OsClosedComponent implements AfterViewInit {
 
   lista: OS[] = [];
 
-  displayedColumns: string[] = ['tecnico', 'cliente', 'abertura', 'fechamento', 'prioridade', 'servico', 'status', 'action'];
+  displayedColumns: string[] = ['tecnico', 'cliente', 'abertura', 'fechamento', 'prioridade', 'servicos', 'status', 'action'];
   dataSource = new MatTableDataSource<OS>(this.lista);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -25,7 +26,8 @@ export class OsClosedComponent implements AfterViewInit {
     private service : OsService,
     private router : Router,
     private tecnicoService: TecnicoService,
-    private clienteService: ClienteService) {}
+    private clienteService: ClienteService,
+    private servicosService: ServicosService) {}
 
   ngAfterViewInit() {
     this.findAll();
@@ -40,6 +42,7 @@ export class OsClosedComponent implements AfterViewInit {
       })
       this.listarTecnico();
       this.listaCliente();
+      this.listarServicos();
       this.dataSource = new MatTableDataSource<OS>(this.lista);
       this.dataSource.paginator = this.paginator;
     })
@@ -57,6 +60,14 @@ export class OsClosedComponent implements AfterViewInit {
     this.lista.forEach(x => {
       this.clienteService.findById(x.cliente).subscribe(resposta => {
         x.cliente = resposta.nome
+      })
+    })
+  }
+
+  listarServicos():void {
+    this.lista.forEach(x => {
+      this.servicosService.findById(x.servicos).subscribe(resposta => {
+        x.servicos = resposta.nome
       })
     })
   }

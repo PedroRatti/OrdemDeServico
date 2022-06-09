@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/models/cliente';
 import { OS } from 'src/app/models/os';
+import { Servicos } from 'src/app/models/servicos';
 import { Tecnico } from 'src/app/models/tecnico';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { OsService } from 'src/app/services/os.service';
+import { ServicosService } from 'src/app/services/servicos.service';
 import { TecnicoService } from 'src/app/services/tecnico.service';
 
 @Component({
@@ -18,17 +20,19 @@ export class OsCreateComponent implements OnInit {
     tecnico: '',
     cliente: '',
     observacoes: '',
-    servico: '',
+    servicos: '',
     status: '',
     prioridade: ''
   }
 
   tecnicos: Tecnico[] = []
   clientes: Cliente[] = []
+  servicos: Servicos[] = []
 
   constructor(
     private tecnicoService: TecnicoService,
     private clienteService: ClienteService,
+    private servicosService: ServicosService,
     private service: OsService,
     private router: Router
   ) { }
@@ -36,6 +40,7 @@ export class OsCreateComponent implements OnInit {
   ngOnInit(): void {
     this.listarTecnicos();
     this.listarClientes();
+    this.listarServicos();
   }
 
   create(): void {
@@ -58,6 +63,12 @@ export class OsCreateComponent implements OnInit {
   listarClientes():void {
     this.clienteService.findAll().subscribe(resposta => {
       this.clientes = resposta;
+    })
+  }
+
+  listarServicos():void {
+    this.servicosService.findAll().subscribe(resposta => {
+      this.servicos = resposta;
     })
   }
 
