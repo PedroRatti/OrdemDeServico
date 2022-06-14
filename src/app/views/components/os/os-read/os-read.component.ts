@@ -19,23 +19,21 @@ export class OsReadComponent implements AfterViewInit {
 
   lista: OS[] = [];
 
+  deAaZ = false;
   displayedColumns: string[] = ['tecnico', 'cliente', 'abertura', 'fechamento', 'prioridade', 'servicos', 'status', 'action'];
   dataSource = new MatTableDataSource<OS>(this.lista);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private service : OsService,
     private router : Router,
     private tecnicoService: TecnicoService,
     private clienteService: ClienteService,
-    private servicosService: ServicosService,
-    private _liveAnnouncer: LiveAnnouncer,) {}
+    private servicosService: ServicosService) {}
 
   ngAfterViewInit() {
     this.findAll();
-    this.dataSource.sort = this.sort;
   }
 
   findAll():void {
@@ -96,47 +94,109 @@ export class OsReadComponent implements AfterViewInit {
 
       if (pesquisa == '') {
         this.dataSource = new MatTableDataSource<OS>(this.lista);
-      
       } else {
         var listaFiltrada = this.lista.filter(x => {
           console.log(x);
-
           if (x.servicos.toUpperCase().indexOf(pesquisa.toUpperCase()) >= 0) {
             return x
-          }
-          if (pesquisa.toUpperCase() == x.prioridade) {
+          } if (pesquisa.toUpperCase() == x.prioridade) {
             return x
-          }
-          if (x.tecnico.toUpperCase().indexOf(pesquisa.toUpperCase()) >= 0) {
+          } if (x.tecnico.toUpperCase().indexOf(pesquisa.toUpperCase()) >= 0) {
             return x
-          }
-          if (x.cliente.toUpperCase().indexOf(pesquisa.toUpperCase()) >= 0) {
+          } if (x.cliente.toUpperCase().indexOf(pesquisa.toUpperCase()) >= 0) {
             return x
-          }
-          if (pesquisa.toUpperCase() == x.status) {
+          } if (pesquisa.toUpperCase() == x.status) {
             return x
           }
           return null
         })
-        console.log('lista filtrada', listaFiltrada);
         this.dataSource = new MatTableDataSource<OS>(listaFiltrada);
       
       }
   }
 
-  /** Announce the change in sort state for assistive technology. */
-  announceSortChange(sortState: any) {
-    console.log(sortState);
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
+  ordenacaoCliente(ordem : boolean): void {
+    var listaOrdenada = this.lista.sort((a, b) => {
+      if(a.cliente > b.cliente) {
+        return ordem ? 1 : -1 
+      } else if(a.cliente < b.cliente) {
+        return ordem ? -1 : 1 
+      } else {
+        return 0
+      }
+      })
+      this.deAaZ =! ordem
+      this.dataSource = new MatTableDataSource<OS>(listaOrdenada);
+  }
 
-}
+  ordenacaoTecnico(ordem : boolean): void {
+    var listaOrdenada = this.lista.sort((a, b) => {
+      if(a.tecnico > b.tecnico) {
+        return ordem ? 1 : -1 
+      } else if(a.tecnico < b.tecnico) {
+        return ordem ? -1 : 1 
+      } else {
+        return 0
+      }
+      })
+      this.deAaZ =! ordem
+      this.dataSource = new MatTableDataSource<OS>(listaOrdenada);
+  }
+
+  ordenacaoAbertura(ordem : boolean): void {
+    var listaOrdenada = this.lista.sort((a, b) => {
+      if(a.dataAbertura > b.dataAbertura) {
+        return ordem ? 1 : -1 
+      } else if(a.dataAbertura < b.dataAbertura) {
+        return ordem ? -1 : 1 
+      } else {
+        return 0
+      }
+      })
+      this.deAaZ =! ordem
+      this.dataSource = new MatTableDataSource<OS>(listaOrdenada);
+  }
+
+  ordenacaoPrioridade(ordem : boolean): void {
+    var listaOrdenada = this.lista.sort((a, b) => {
+      if(a.prioridade > b.prioridade) {
+        return ordem ? 1 : -1 
+      } else if(a.prioridade < b.prioridade) {
+        return ordem ? -1 : 1 
+      } else {
+        return 0
+      }
+      })
+      this.deAaZ =! ordem
+      this.dataSource = new MatTableDataSource<OS>(listaOrdenada);
+  }
+
+  ordenacaoServicos(ordem : boolean): void {
+    var listaOrdenada = this.lista.sort((a, b) => {
+      if(a.servicos > b.servicos) {
+        return ordem ? 1 : -1 
+      } else if(a.servicos < b.servicos) {
+        return ordem ? -1 : 1 
+      } else {
+        return 0
+      }
+      })
+      this.deAaZ =! ordem
+      this.dataSource = new MatTableDataSource<OS>(listaOrdenada);
+  }
+
+  ordenacaoStatus(ordem : boolean): void {
+    var listaOrdenada = this.lista.sort((a, b) => {
+      if(a.status > b.status) {
+        return ordem ? 1 : -1 
+      } else if(a.status < b.status) {
+        return ordem ? -1 : 1 
+      } else {
+        return 0
+      }
+      })
+      this.deAaZ =! ordem
+      this.dataSource = new MatTableDataSource<OS>(listaOrdenada);
+  }
 
   }
